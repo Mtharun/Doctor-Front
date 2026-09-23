@@ -66,7 +66,7 @@ function UploadReportModal({ onClose, onDone }) {
             {!patients ? (
               <LoadingState label="Loading patients..." />
             ) : (
-              <select value={form.patientId} onChange={(e) => setForm({ ...form, patientId: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200">
+              <select value={form.patientId} onChange={(e) => setForm({ ...form, patientId: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all">
                 <option value="">Select a patient</option>
                 {patients.map((p) => (
                   <option key={p.id} value={p.id}>{p.name} ({p.email})</option>
@@ -76,12 +76,12 @@ function UploadReportModal({ onClose, onDone }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-[#0F172A] mb-2">Title</label>
-            <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200" placeholder="e.g. Dental X-Ray Report" />
+            <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" placeholder="e.g. Dental X-Ray Report" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Type</label>
-              <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200">
+              <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all">
                 <option value="Report">Report</option>
                 <option value="X-Ray">X-Ray</option>
                 <option value="Lab">Lab</option>
@@ -89,12 +89,12 @@ function UploadReportModal({ onClose, onDone }) {
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Doctor</label>
-              <input value={form.doctor} onChange={(e) => setForm({ ...form, doctor: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200" placeholder="Dr. ..." />
+              <input value={form.doctor} onChange={(e) => setForm({ ...form, doctor: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" placeholder="Dr. ..." />
             </div>
           </div>
           <div>
             <label className="block text-sm font-medium text-[#0F172A] mb-2">Notes</label>
-            <textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 resize-none" />
+            <textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[#0F172A] mb-2">File (PDF/Image)</label>
@@ -180,7 +180,7 @@ export default function Reports() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white"
+                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex items-start gap-6">
                   <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">

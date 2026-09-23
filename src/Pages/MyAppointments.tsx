@@ -59,7 +59,7 @@ function RescheduleModal({ appointment, onClose, onDone }) {
           <h3 className="text-lg font-bold text-[#0F172A]">Reschedule Appointment</h3>
           <button onClick={onClose} aria-label="Close"><X className="w-5 h-5 text-[#64748B]" /></button>
         </div>
-        <p className="text-sm text-[#64748B] mb-4">with Dr. {appointment.dentist.name} · {appointment.service.name}</p>
+        <p className="text-sm text-[#64748B] mb-4">with {appointment.dentist.name} · {appointment.service.name}</p>
 
         <label className="block text-sm font-medium text-[#0F172A] mb-2">New Date</label>
         <input
@@ -190,7 +190,7 @@ export default function MyAppointments() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white"
+                  className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="flex flex-col sm:flex-row items-start gap-6">
                     <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0284C7]/10 flex flex-col items-center justify-center">
@@ -204,7 +204,7 @@ export default function MyAppointments() {
                           <h3 className="text-xl font-bold text-[#0F172A] mb-2">{apt.service.name}</h3>
                           <div className="flex flex-wrap gap-4 text-sm text-[#64748B]">
                             <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {apt.time}</span>
-                            <span className="flex items-center gap-1"><User className="w-4 h-4" /> Dr. {apt.dentist.name}</span>
+                            <span className="flex items-center gap-1"><User className="w-4 h-4" /> {apt.dentist.name}</span>
                           </div>
                         </div>
                         <StatusBadge status={apt.status} />

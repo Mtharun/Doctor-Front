@@ -104,7 +104,7 @@ export default function PatientDashboard() {
                       <h4 className="font-semibold text-[#0F172A] mb-1 truncate">{apt.service.name}</h4>
                       <div className="flex flex-wrap items-center gap-3 text-sm text-[#64748B]">
                         <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {apt.time}</span>
-                        <span>Dr. {apt.dentist.name}</span>
+                        <span>{apt.dentist.name}</span>
                       </div>
                     </div>
                     <StatusBadge status={apt.status} />

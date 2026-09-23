@@ -92,7 +92,12 @@ export default function AdminLayout() {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] via-[#EFF6FF] to-[#F0F9FF]">
+    <div className="relative min-h-screen bg-gradient-to-br from-[#F8FAFC] via-[#EFF6FF] to-[#F0F9FF] overflow-x-hidden">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden -z-10">
+        <div className="absolute -top-40 right-0 w-[32rem] h-[32rem] rounded-full bg-[#0EA5E9]/20 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 w-[26rem] h-[26rem] rounded-full bg-[#22C55E]/10 blur-3xl" />
+      </div>
+
       {/* Desktop sidebar */}
       <div className="hidden lg:flex flex-col fixed left-0 top-0 h-full w-64 bg-white/70 backdrop-blur-xl border-r border-[#0EA5E9]/10 z-40">
         <SidebarContent />

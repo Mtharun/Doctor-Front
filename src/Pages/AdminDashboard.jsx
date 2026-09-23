@@ -95,7 +95,7 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white"
+                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center mb-4`}>
                   <stat.icon className="w-6 h-6 text-white" />
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="font-semibold text-[#0F172A] mb-1 truncate">{apt.patient.name}</h4>
-                          <p className="text-sm text-[#64748B] truncate">{apt.service.name} · Dr. {apt.dentist.name}</p>
+                          <p className="text-sm text-[#64748B] truncate">{apt.service.name} · {apt.dentist.name}</p>
                         </div>
                         <StatusBadge status={apt.status} />
                       </div>

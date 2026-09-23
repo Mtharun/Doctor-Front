@@ -64,7 +64,7 @@ export default function AdminPatientDetail() {
                       <p className="font-semibold text-[#0F172A] text-sm">{apt.service.name}</p>
                       <StatusBadge status={apt.status} />
                     </div>
-                    <p className="text-xs text-[#64748B] flex items-center gap-1"><Clock className="w-3 h-3" /> {apt.date} at {apt.time} · Dr. {apt.dentist.name}</p>
+                    <p className="text-xs text-[#64748B] flex items-center gap-1"><Clock className="w-3 h-3" /> {apt.date} at {apt.time} · {apt.dentist.name}</p>
                   </div>
                 ))}
               </div>

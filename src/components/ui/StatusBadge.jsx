@@ -21,7 +21,11 @@ function label(status) {
 
 export default function StatusBadge({ status }) {
   return (
-    <span className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${STYLES[status] || "bg-gray-100 text-gray-600"}`}>
+    <span
+      className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ring-1 ring-inset ring-current/10 ${
+        STYLES[status] || "bg-gray-100 text-gray-600"
+      }`}
+    >
       {label(status)}
     </span>
   );

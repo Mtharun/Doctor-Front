@@ -45,7 +45,7 @@ export default function AdminPatients() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-8">
-          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-white">
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] mb-1">{patients ? patients.length : "–"}</h3>
             <p className="text-sm sm:text-base text-[#64748B]">{search ? "Matching Results" : "Total Patients"}</p>
           </div>

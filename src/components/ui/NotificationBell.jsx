@@ -52,14 +52,14 @@ export default function NotificationBell() {
       >
         <Bell className="w-5 h-5 text-[#64748B]" />
         {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#EF4444] text-white text-[10px] font-bold flex items-center justify-center">
+          <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#EF4444] text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white shadow-sm">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-80 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+        <div className="absolute right-0 mt-2 w-80 max-w-[90vw] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white overflow-hidden z-50">
           <div className="px-4 py-3 border-b border-gray-100 font-semibold text-[#0F172A]">Notifications</div>
           <div className="max-h-80 overflow-y-auto">
             {notifications.length === 0 ? (

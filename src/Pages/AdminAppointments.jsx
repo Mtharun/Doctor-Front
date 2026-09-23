@@ -88,7 +88,7 @@ export default function AdminAppointments() {
             { value: counts.confirmed, label: "Confirmed" },
             { value: counts.today, label: "Today" },
           ].map((s) => (
-            <div key={s.label} className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-white">
+            <div key={s.label} className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] mb-1">{s.value}</h3>
               <p className="text-sm sm:text-base text-[#64748B]">{s.label}</p>
             </div>
@@ -120,19 +120,19 @@ export default function AdminAppointments() {
           <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-xl border border-white overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-gradient-to-r from-[#0EA5E9]/5 to-[#0284C7]/5">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-[#0F172A]">Patient</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-[#0F172A]">Date &amp; Time</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-[#0F172A]">Service</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-[#0F172A]">Dentist</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-[#0F172A]">Status</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-[#0F172A]">Actions</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Patient</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Date &amp; Time</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Service</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Dentist</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Status</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {appointments.map((apt, i) => (
-                    <motion.tr key={apt.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }} className="hover:bg-gray-50/50">
+                    <motion.tr key={apt.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }} className="hover:bg-[#0EA5E9]/5 transition-colors">
                       <td className="px-6 py-4">
                         <p className="font-semibold text-[#0F172A]">{apt.patient.name}</p>
                         <p className="text-sm text-[#64748B]">{apt.patient.phone}</p>
@@ -142,7 +142,7 @@ export default function AdminAppointments() {
                         <p className="text-sm text-[#64748B]">{apt.time}</p>
                       </td>
                       <td className="px-6 py-4 text-[#0F172A]">{apt.service.name}</td>
-                      <td className="px-6 py-4 text-[#64748B]">Dr. {apt.dentist.name}</td>
+                      <td className="px-6 py-4 text-[#64748B]">{apt.dentist.name}</td>
                       <td className="px-6 py-4"><StatusBadge status={apt.status} /></td>
                       <td className="px-6 py-4">
                         <div className="flex gap-2">

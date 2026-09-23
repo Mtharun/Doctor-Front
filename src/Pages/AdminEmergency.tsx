@@ -107,7 +107,7 @@ export default function AdminEmergency() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className={`bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border-l-8 ${PRIORITY_STYLES[r.priority]}`}
+                className={`bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border-l-8 hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 ${PRIORITY_STYLES[r.priority]}`}
               >
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                   <div className="flex items-start gap-4 flex-1 min-w-[240px]">

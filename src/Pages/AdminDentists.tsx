@@ -55,16 +55,16 @@ function DentistModal({ initial, onClose, onSaved }) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Name</label>
-              <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200" placeholder="Dr. Jane Doe" />
+              <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" placeholder="Dr. Jane Doe" />
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Specialty</label>
-              <input value={form.specialty} onChange={(e) => setForm({ ...form, specialty: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200" placeholder="Orthodontics" />
+              <input value={form.specialty} onChange={(e) => setForm({ ...form, specialty: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" placeholder="Orthodontics" />
             </div>
           </div>
           <div>
             <label className="block text-sm font-medium text-[#0F172A] mb-2">Bio</label>
-            <textarea value={form.bio || ""} onChange={(e) => setForm({ ...form, bio: e.target.value })} rows={2} className="w-full px-4 py-3 rounded-xl border border-gray-200 resize-none" />
+            <textarea value={form.bio || ""} onChange={(e) => setForm({ ...form, bio: e.target.value })} rows={2} className="w-full px-4 py-3 rounded-xl border border-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[#0F172A] mb-2">Working Days</label>
@@ -84,15 +84,15 @@ function DentistModal({ initial, onClose, onSaved }) {
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Start</label>
-              <input type="time" value={form.startTime} onChange={(e) => setForm({ ...form, startTime: e.target.value })} className="w-full px-3 py-3 rounded-xl border border-gray-200" />
+              <input type="time" value={form.startTime} onChange={(e) => setForm({ ...form, startTime: e.target.value })} className="w-full px-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">End</label>
-              <input type="time" value={form.endTime} onChange={(e) => setForm({ ...form, endTime: e.target.value })} className="w-full px-3 py-3 rounded-xl border border-gray-200" />
+              <input type="time" value={form.endTime} onChange={(e) => setForm({ ...form, endTime: e.target.value })} className="w-full px-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Slot (min)</label>
-              <input type="number" min={5} value={form.slotMinutes} onChange={(e) => setForm({ ...form, slotMinutes: e.target.value })} className="w-full px-3 py-3 rounded-xl border border-gray-200" />
+              <input type="number" min={5} value={form.slotMinutes} onChange={(e) => setForm({ ...form, slotMinutes: e.target.value })} className="w-full px-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
             </div>
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
@@ -157,7 +157,7 @@ export default function AdminDentists() {
         {dentists && dentists.length > 0 && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {dentists.map((d) => (
-              <div key={d.id} className={`p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-white shadow-lg ${!d.active ? "opacity-60" : ""}`}>
+              <div key={d.id} className={`p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-white shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ${!d.active ? "opacity-60" : ""}`}>
                 <div className="flex items-start justify-between mb-3">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
                     <Stethoscope className="w-6 h-6 text-white" />

@@ -27,7 +27,7 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.05 }}
-            className="bg-white/60 backdrop-blur-sm border border-white rounded-2xl overflow-hidden shadow-md"
+            className="bg-white/60 backdrop-blur-sm border border-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <button
               onClick={() => setOpen(open === i ? -1 : i)}

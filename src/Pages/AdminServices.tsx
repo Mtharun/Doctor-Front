@@ -46,20 +46,20 @@ function ServiceModal({ initial, onClose, onSaved }) {
         <form onSubmit={submit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-[#0F172A] mb-2">Name</label>
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200" />
+            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[#0F172A] mb-2">Description</label>
-            <textarea value={form.description || ""} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 resize-none" />
+            <textarea value={form.description || ""} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Duration (min)</label>
-              <input type="number" min={5} value={form.durationMinutes} onChange={(e) => setForm({ ...form, durationMinutes: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200" />
+              <input type="number" min={5} value={form.durationMinutes} onChange={(e) => setForm({ ...form, durationMinutes: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">Price ($)</label>
-              <input type="number" min={0} value={form.price ?? ""} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200" />
+              <input type="number" min={0} value={form.price ?? ""} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
             </div>
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
@@ -124,7 +124,7 @@ export default function AdminServices() {
         {services && services.length > 0 && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s) => (
-              <div key={s.id} className={`p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-white shadow-lg ${!s.active ? "opacity-60" : ""}`}>
+              <div key={s.id} className={`p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-white shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ${!s.active ? "opacity-60" : ""}`}>
                 <div className="flex items-start justify-between mb-3">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
                     <Stethoscope className="w-6 h-6 text-white" />
