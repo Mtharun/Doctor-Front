@@ -33,6 +33,15 @@ const TESTIMONIALS = [
   { name: "Rohan Das", quote: "Being able to see my reports and appointment history in one dashboard is exactly what I wanted from a dental portal." },
 ];
 
+// Rotating "sticker" tints for circular icon/avatar placeholders, used in
+// place of a flat dark bg-ink-900 circle so grids of them read as playful
+// candy chips instead of one repeated dark blob.
+const STICKER_TINTS = [
+  "bg-brand-100 text-brand-700",
+  "bg-coral-100 text-coral-700",
+  "bg-sun-100 text-sun-800",
+];
+
 const FAQ_PREVIEW = [
   { q: "How do I book an appointment?", a: "Create a free patient account, then go to “Book Appointment” from your dashboard. Pick a service, dentist, date and an available time slot." },
   { q: "What should I do in a dental emergency?", a: "Use the Emergency Request form for urgent, non-life-threatening issues. For a life-threatening emergency, call your local emergency number immediately." },
@@ -197,8 +206,8 @@ export default function Home() {
               <div key={d?.id ?? i} className="card card-hover p-6 text-center">
                 {d ? (
                   <>
-                    <div className="w-16 h-16 mx-auto rounded-full bg-ink-900 flex items-center justify-center mb-4">
-                      <Stethoscope className="w-7 h-7 text-white" />
+                    <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 ${STICKER_TINTS[i % STICKER_TINTS.length]}`}>
+                      <Stethoscope className="w-7 h-7" />
                     </div>
                     <h3 className="font-semibold text-ink-900 mb-1">{d.name}</h3>
                     <p className="text-sm text-brand-700 font-medium">{d.specialty}</p>
@@ -254,13 +263,15 @@ export default function Home() {
       {/* ============ APPOINTMENT CTA ============ */}
       <section className="section pt-0">
         <div className="container-page">
-          <div className="bg-ink-900 rounded-2xl px-8 py-14 sm:px-16 sm:py-16 text-center">
-            <h2 className="text-3xl sm:text-4xl font-serif font-semibold text-white mb-4">Ready when you are.</h2>
-            <p className="text-ink-300 max-w-lg mx-auto mb-8">
+          <div className="bg-coral-600 rounded-3xl px-8 py-14 sm:px-16 sm:py-16 text-center relative overflow-hidden">
+            <span className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-white/10" aria-hidden="true" />
+            <span className="absolute -bottom-10 -right-6 w-40 h-40 rounded-full bg-white/10" aria-hidden="true" />
+            <h2 className="text-3xl sm:text-4xl font-serif font-semibold text-white mb-4 relative">Ready when you are.</h2>
+            <p className="text-white max-w-lg mx-auto mb-8 relative">
               Create a free patient account and book your first appointment in a couple of minutes.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/signup" className="btn bg-white text-ink-900 hover:bg-ink-100 text-base px-7 py-3.5">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center relative">
+              <Link to="/signup" className="btn bg-white text-coral-700 hover:bg-coral-50 text-base px-7 py-3.5">
                 Book Appointment
               </Link>
               <Link to="/login" className="btn btn-outline-invert text-base px-7 py-3.5">

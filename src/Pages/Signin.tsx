@@ -46,17 +46,19 @@ export default function Signin() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Left Side - Branding */}
-      <div className="hidden lg:flex flex-col justify-center bg-ink-900 p-16 relative">
-        <div className="max-w-sm">
-          <span className="w-2.5 h-2.5 rounded-full bg-brand-400 inline-block mb-6" aria-hidden="true" />
+      <div className="hidden lg:flex flex-col justify-center bg-brand-600 p-16 relative overflow-hidden">
+        <span className="absolute -top-10 -right-10 w-56 h-56 rounded-full bg-coral-500/25" aria-hidden="true" />
+        <span className="absolute bottom-10 -left-14 w-40 h-40 rounded-full bg-sun-400/20" aria-hidden="true" />
+        <div className="max-w-sm relative">
+          <span className="w-3 h-3 rounded-full bg-sun-400 inline-block mb-6" aria-hidden="true" />
           <h1 className="font-serif text-4xl font-semibold text-white mb-4 leading-tight">{CLINIC.name}</h1>
-          <p className="text-lg text-ink-300 mb-10">Your Health, Our Mission.</p>
+          <p className="text-lg text-brand-100 mb-10">Your Health, Our Mission.</p>
 
-          <div className="flex items-start gap-4 p-5 rounded-lg bg-white/5 border border-white/10">
-            <ShieldCheck className="w-6 h-6 text-brand-400 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-4 p-5 rounded-2xl bg-white/10 border-2 border-white/20">
+            <ShieldCheck className="w-6 h-6 text-sun-300 shrink-0 mt-0.5" />
             <div className="text-left">
               <p className="font-semibold text-white text-sm">Secure &amp; Private</p>
-              <p className="text-sm text-ink-400 mt-1">Passwords are hashed and your medical records stay visible to you and your care team only.</p>
+              <p className="text-sm text-brand-100 mt-1">Passwords are hashed and your medical records stay visible to you and your care team only.</p>
             </div>
           </div>
         </div>

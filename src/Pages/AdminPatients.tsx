@@ -7,6 +7,14 @@ import LoadingState from "../components/ui/LoadingState.jsx";
 import ErrorState from "../components/ui/ErrorState.jsx";
 import EmptyState from "../components/ui/EmptyState.jsx";
 
+// Rotating "sticker" tints for the initials avatar, instead of a flat dark
+// bg-ink-900 circle repeated across the whole patient grid.
+const STICKER_TINTS = [
+  "bg-brand-100 text-brand-700",
+  "bg-coral-100 text-coral-700",
+  "bg-sun-100 text-sun-800",
+];
+
 export default function AdminPatients() {
   const [patients, setPatients] = useState(null);
   const [error, setError] = useState(null);
@@ -60,11 +68,11 @@ export default function AdminPatients() {
 
         {patients && patients.length > 0 && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {patients.map((patient) => (
+            {patients.map((patient, i) => (
               <div key={patient.id} className="card card-hover p-6">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-ink-900 flex items-center justify-center shrink-0">
-                    <span className="text-sm font-semibold text-white">{patient.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}</span>
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${STICKER_TINTS[i % STICKER_TINTS.length]}`}>
+                    <span className="text-sm font-semibold">{patient.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-ink-900 mb-0.5 truncate">{patient.name}</h3>

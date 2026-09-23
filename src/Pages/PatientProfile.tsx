@@ -68,8 +68,8 @@ export default function PatientProfile() {
 
       <div className="card p-6 sm:p-8 mb-6">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-full bg-ink-900 flex items-center justify-center shrink-0">
-            <User className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 rounded-full bg-brand-100 flex items-center justify-center shrink-0">
+            <User className="w-6 h-6 text-brand-700" />
           </div>
           <div>
             <h3 className="font-semibold text-ink-900">{user?.name}</h3>

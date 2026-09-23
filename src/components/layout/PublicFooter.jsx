@@ -30,11 +30,11 @@ function TwitterMark(props) {
 
 export default function PublicFooter() {
   return (
-    <footer className="border-t border-ink-200 bg-ink-900 text-ink-300">
+    <footer className="border-t border-brand-900 bg-brand-800 text-brand-100">
       <div className="container-page py-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2 mb-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-brand-400" aria-hidden="true" />
+            <span className="w-2.5 h-2.5 rounded-full bg-sun-400" aria-hidden="true" />
             <span className="font-serif text-xl font-semibold text-white">{CLINIC.name}</span>
           </div>
           <p className="text-sm leading-relaxed max-w-xs">
@@ -77,7 +77,7 @@ export default function PublicFooter() {
             <li><Link to="/terms" className="hover:text-white">Terms &amp; Conditions</Link></li>
             <li><Link to="/contact" className="hover:text-white">Contact Us</Link></li>
             <li>
-              <Link to="/patient/emergency" className="flex items-center gap-1.5 text-danger-400 hover:text-danger-300 font-medium">
+              <Link to="/patient/emergency" className="flex items-center gap-1.5 text-coral-100 hover:text-white font-medium">
                 <AlertCircle className="w-3.5 h-3.5" /> Emergency Request
               </Link>
             </li>
@@ -87,14 +87,14 @@ export default function PublicFooter() {
         <div>
           <h4 className="font-semibold text-white mb-4 text-sm">Visit &amp; Hours</h4>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-brand-400 shrink-0" /> {CLINIC.phone}</li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-brand-400 shrink-0" /> {CLINIC.email}</li>
-            <li className="flex items-start gap-2"><MapPin className="w-4 h-4 text-brand-400 mt-0.5 shrink-0" /> {CLINIC.address}</li>
+            <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-sun-300 shrink-0" /> {CLINIC.phone}</li>
+            <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-sun-300 shrink-0" /> {CLINIC.email}</li>
+            <li className="flex items-start gap-2"><MapPin className="w-4 h-4 text-sun-300 mt-0.5 shrink-0" /> {CLINIC.address}</li>
           </ul>
-          <ul className="mt-4 space-y-1.5 text-sm border-t border-white/10 pt-4">
+          <ul className="mt-4 space-y-1.5 text-sm border-t border-white/15 pt-4">
             {CLINIC.hours?.map((h) => (
               <li key={h.day} className="flex items-start gap-2">
-                <Clock className="w-3.5 h-3.5 text-brand-400 mt-0.5 shrink-0" />
+                <Clock className="w-3.5 h-3.5 text-sun-300 mt-0.5 shrink-0" />
                 <span>{h.day}: {h.time}</span>
               </li>
             ))}
@@ -102,8 +102,8 @@ export default function PublicFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <p className="container-page py-6 text-center text-sm text-ink-400">
+      <div className="border-t border-white/15">
+        <p className="container-page py-6 text-center text-sm text-brand-100">
           © {new Date().getFullYear()} {CLINIC.name}. All rights reserved. · Professional Dental Services
         </p>
       </div>

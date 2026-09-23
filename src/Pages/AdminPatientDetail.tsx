@@ -36,8 +36,8 @@ export default function AdminPatientDetail() {
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
           <div className="card p-6 sm:p-8 mb-8">
             <div className="flex flex-wrap items-start gap-6">
-              <div className="w-16 h-16 rounded-full bg-ink-900 flex items-center justify-center shrink-0">
-                <span className="text-lg font-semibold text-white">{patient.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}</span>
+              <div className="w-16 h-16 rounded-full bg-brand-100 flex items-center justify-center shrink-0">
+                <span className="text-lg font-semibold text-brand-700">{patient.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}</span>
               </div>
               <div className="flex-1 min-w-[200px]">
                 <h1 className="text-2xl font-serif font-semibold text-ink-900 mb-1">{patient.name}</h1>

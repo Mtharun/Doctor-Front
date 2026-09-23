@@ -6,6 +6,14 @@ import { DentistsApi } from "../api/dentists.js";
 import LoadingState from "../components/ui/LoadingState.jsx";
 import ErrorState from "../components/ui/ErrorState.jsx";
 
+// Rotating "sticker" tints for the avatar placeholders, instead of a flat
+// dark bg-ink-900 circle repeated across the whole grid.
+const STICKER_TINTS = [
+  "bg-brand-100 text-brand-700",
+  "bg-coral-100 text-coral-700",
+  "bg-sun-100 text-sun-800",
+];
+
 export default function Doctors() {
   const [dentists, setDentists] = useState(null);
   const [error, setError] = useState(null);
@@ -48,8 +56,8 @@ export default function Doctors() {
                 transition={{ delay: i * 0.06 }}
                 className="card card-hover p-6 text-center flex flex-col"
               >
-                <div className="w-20 h-20 mx-auto rounded-full bg-ink-900 flex items-center justify-center mb-5">
-                  <Stethoscope className="w-9 h-9 text-white" />
+                <div className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-5 ${STICKER_TINTS[i % STICKER_TINTS.length]}`}>
+                  <Stethoscope className="w-9 h-9" />
                 </div>
                 <h3 className="font-semibold text-ink-900 mb-1">{d.name}</h3>
                 <p className="text-sm text-brand-700 font-medium mb-3">{d.specialty}</p>
