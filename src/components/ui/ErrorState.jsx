@@ -4,17 +4,14 @@ import { AlertTriangle, RotateCcw } from "lucide-react";
 // isn't stuck looking at a dead page after a flaky network request.
 export default function ErrorState({ message = "Unable to load this data.", onRetry }) {
   return (
-    <div className="flex flex-col items-center justify-center text-center py-16 px-6 bg-[#FEF2F2] rounded-3xl border border-[#EF4444]/20">
-      <div className="w-16 h-16 rounded-2xl bg-[#EF4444]/10 flex items-center justify-center mb-4">
-        <AlertTriangle className="w-8 h-8 text-[#EF4444]" />
+    <div className="flex flex-col items-center justify-center text-center py-16 px-6 bg-danger-50 rounded-xl border border-danger-600/15">
+      <div className="w-14 h-14 rounded-lg bg-white flex items-center justify-center mb-4 border border-danger-600/15">
+        <AlertTriangle className="w-7 h-7 text-danger-600" />
       </div>
-      <h3 className="text-lg font-bold text-[#0F172A] mb-1">Something went wrong</h3>
-      <p className="text-[#64748B] max-w-sm mb-4">{message}</p>
+      <h3 className="text-lg font-semibold text-ink-900 mb-1">Something went wrong</h3>
+      <p className="text-ink-600 max-w-sm mb-4 text-sm">{message}</p>
       {onRetry && (
-        <button
-          onClick={onRetry}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EF4444] text-white font-semibold hover:bg-[#DC2626] transition-all"
-        >
+        <button onClick={onRetry} className="btn btn-danger btn-sm">
           <RotateCcw className="w-4 h-4" />
           Try Again
         </button>

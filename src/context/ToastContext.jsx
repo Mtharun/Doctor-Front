@@ -31,11 +31,11 @@ export function ToastProvider({ children }) {
 
   const ICONS = { success: CheckCircle, error: XCircle, info: Info };
   const STYLES = {
-    success: "bg-white border-l-4 border-[#22C55E] text-[#0F172A]",
-    error: "bg-white border-l-4 border-[#EF4444] text-[#0F172A]",
-    info: "bg-white border-l-4 border-[#0EA5E9] text-[#0F172A]",
+    success: "bg-white border-l-4 border-success-600 text-ink-900",
+    error: "bg-white border-l-4 border-danger-600 text-ink-900",
+    info: "bg-white border-l-4 border-brand-600 text-ink-900",
   };
-  const ICON_COLORS = { success: "text-[#22C55E]", error: "text-[#EF4444]", info: "text-[#0EA5E9]" };
+  const ICON_COLORS = { success: "text-success-600", error: "text-danger-600", info: "text-brand-600" };
 
   return (
     <ToastContext.Provider value={toast}>
@@ -44,10 +44,10 @@ export function ToastProvider({ children }) {
         {toasts.map((t) => {
           const Icon = ICONS[t.type];
           return (
-            <div key={t.id} className={`flex items-start gap-3 p-4 rounded-xl shadow-xl ${STYLES[t.type]}`}>
+            <div key={t.id} className={`flex items-start gap-3 p-4 rounded-lg shadow-lg border border-ink-200 ${STYLES[t.type]}`}>
               <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${ICON_COLORS[t.type]}`} />
               <p className="text-sm flex-1">{t.message}</p>
-              <button onClick={() => remove(t.id)} aria-label="Dismiss" className="text-[#64748B] hover:text-[#0F172A]">
+              <button onClick={() => remove(t.id)} aria-label="Dismiss" className="text-ink-400 hover:text-ink-900">
                 <X className="w-4 h-4" />
               </button>
             </div>

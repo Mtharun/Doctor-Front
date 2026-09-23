@@ -60,55 +60,55 @@ export default function PatientProfile() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-8 sm:py-12">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#0F172A] mb-2">My Profile</h1>
-        <p className="text-[#64748B]">Update your personal information</p>
+    <div className="container-page max-w-3xl py-8 sm:py-12">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+        <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-ink-900 mb-1">My Profile</h1>
+        <p className="text-ink-500">Update your personal information</p>
       </motion.div>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-xl border border-white mb-8">
+      <div className="card p-6 sm:p-8 mb-6">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-            <User className="w-8 h-8 text-white" />
+          <div className="w-14 h-14 rounded-full bg-ink-900 flex items-center justify-center shrink-0">
+            <User className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 className="font-bold text-[#0F172A] text-lg">{user?.name}</h3>
-            <p className="text-sm text-[#64748B]">{user?.email}</p>
+            <h3 className="font-semibold text-ink-900">{user?.name}</h3>
+            <p className="text-sm text-ink-500">{user?.email}</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit(onSaveProfile)} className="space-y-5" noValidate>
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">Full Name</label>
+            <label className="field-label">Full Name</label>
             <div className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B]" />
-              <input {...register("name", { required: "Name is required" })} className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]" />
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-ink-400" />
+              <input {...register("name", { required: "Name is required" })} className="input-field pl-10" />
             </div>
-            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+            {errors.name && <p className="field-error">{errors.name.message}</p>}
           </div>
 
           <div className="grid sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Phone</label>
+              <label className="field-label">Phone</label>
               <div className="relative">
-                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B]" />
-                <input {...register("phone", { pattern: { value: /^[0-9+\-\s]{7,15}$/, message: "Enter a valid phone number" } })} className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]" />
+                <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-ink-400" />
+                <input {...register("phone", { pattern: { value: /^[0-9+\-\s]{7,15}$/, message: "Enter a valid phone number" } })} className="input-field pl-10" />
               </div>
-              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
+              {errors.phone && <p className="field-error">{errors.phone.message}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Age</label>
+              <label className="field-label">Age</label>
               <div className="relative">
-                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B]" />
-                <input type="number" {...register("age", { min: { value: 1, message: "Invalid age" }, max: { value: 120, message: "Invalid age" } })} className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]" />
+                <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-ink-400" />
+                <input type="number" {...register("age", { min: { value: 1, message: "Invalid age" }, max: { value: 120, message: "Invalid age" } })} className="input-field pl-10" />
               </div>
-              {errors.age && <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>}
+              {errors.age && <p className="field-error">{errors.age.message}</p>}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">Medical History</label>
-            <select {...register("medicalHistory")} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]">
+            <label className="field-label">Medical History</label>
+            <select {...register("medicalHistory")} className="input-field">
               <option value="">None</option>
               <option value="diabetes">Diabetes</option>
               <option value="hypertension">Hypertension</option>
@@ -118,37 +118,29 @@ export default function PatientProfile() {
             </select>
           </div>
 
-          <button
-            type="submit"
-            disabled={savingProfile || !isDirty}
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50"
-          >
+          <button type="submit" disabled={savingProfile || !isDirty} className="btn btn-primary">
             {savingProfile && <Loader2 className="w-4 h-4 animate-spin" />}
             {savingProfile ? "Saving..." : "Save Changes"}
           </button>
         </form>
       </div>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-xl border border-white">
-        <h3 className="font-bold text-[#0F172A] text-lg mb-6 flex items-center gap-2">
-          <Lock className="w-5 h-5 text-[#0EA5E9]" /> Change Password
+      <div className="card p-6 sm:p-8">
+        <h3 className="font-semibold text-ink-900 mb-6 flex items-center gap-2">
+          <Lock className="w-5 h-5 text-brand-600" /> Change Password
         </h3>
         <form onSubmit={handlePwSubmit(onChangePassword)} className="space-y-5" noValidate>
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">Current Password</label>
-            <input type="password" {...registerPw("currentPassword", { required: "Current password is required" })} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]" />
-            {pwErrors.currentPassword && <p className="text-red-500 text-sm mt-1">{pwErrors.currentPassword.message}</p>}
+            <label className="field-label">Current Password</label>
+            <input type="password" {...registerPw("currentPassword", { required: "Current password is required" })} className="input-field" />
+            {pwErrors.currentPassword && <p className="field-error">{pwErrors.currentPassword.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">New Password</label>
-            <input type="password" {...registerPw("newPassword", { required: "New password is required", minLength: { value: 6, message: "Minimum 6 characters" } })} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]" />
-            {pwErrors.newPassword && <p className="text-red-500 text-sm mt-1">{pwErrors.newPassword.message}</p>}
+            <label className="field-label">New Password</label>
+            <input type="password" {...registerPw("newPassword", { required: "New password is required", minLength: { value: 6, message: "Minimum 6 characters" } })} className="input-field" />
+            {pwErrors.newPassword && <p className="field-error">{pwErrors.newPassword.message}</p>}
           </div>
-          <button
-            type="submit"
-            disabled={savingPassword}
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-[#0EA5E9] text-[#0EA5E9] font-semibold hover:bg-[#0EA5E9]/5 transition-all disabled:opacity-50"
-          >
+          <button type="submit" disabled={savingPassword} className="btn btn-outline">
             {savingPassword && <Loader2 className="w-4 h-4 animate-spin" />}
             {savingPassword ? "Updating..." : "Update Password"}
           </button>

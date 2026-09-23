@@ -48,27 +48,27 @@ export default function NotificationBell() {
       <button
         onClick={handleOpen}
         aria-label="Notifications"
-        className="relative p-2 rounded-xl hover:bg-gray-100 transition-colors"
+        className="relative p-2 rounded-md hover:bg-ink-100 transition-colors"
       >
-        <Bell className="w-5 h-5 text-[#64748B]" />
+        <Bell className="w-5 h-5 text-ink-500" />
         {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#EF4444] text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white shadow-sm">
+          <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-danger-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-80 max-w-[90vw] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white overflow-hidden z-50">
-          <div className="px-4 py-3 border-b border-gray-100 font-semibold text-[#0F172A]">Notifications</div>
+        <div className="absolute right-0 mt-2 w-80 max-w-[90vw] bg-white rounded-lg shadow-xl border border-ink-200 overflow-hidden z-50">
+          <div className="px-4 py-3 border-b border-ink-100 font-semibold text-ink-900 text-sm">Notifications</div>
           <div className="max-h-80 overflow-y-auto">
             {notifications.length === 0 ? (
-              <p className="text-sm text-[#64748B] text-center py-8">No notifications yet</p>
+              <p className="text-sm text-ink-500 text-center py-8">No notifications yet</p>
             ) : (
               notifications.map((n) => (
-                <div key={n.id} className={`px-4 py-3 border-b border-gray-50 text-sm ${!n.read ? "bg-[#0EA5E9]/5" : ""}`}>
-                  <p className="text-[#0F172A]">{n.message}</p>
-                  <p className="text-xs text-[#94A3B8] mt-1">{new Date(n.createdAt).toLocaleString()}</p>
+                <div key={n.id} className={`px-4 py-3 border-b border-ink-100 text-sm ${!n.read ? "bg-brand-50" : ""}`}>
+                  <p className="text-ink-800">{n.message}</p>
+                  <p className="text-xs text-ink-400 mt-1">{new Date(n.createdAt).toLocaleString()}</p>
                 </div>
               ))
             )}

@@ -28,27 +28,30 @@ export default function Contact() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl sm:text-5xl font-bold text-[#0F172A] mb-4">Contact Us</h1>
-        <p className="text-lg text-[#64748B]">We'd love to hear from you</p>
-      </div>
+    <div>
+      <section className="bg-sand-50 border-b border-ink-200">
+        <div className="container-page py-16 sm:py-20 text-center">
+          <span className="eyebrow mb-4 justify-center">Get In Touch</span>
+          <h1 className="text-4xl sm:text-5xl font-serif font-semibold text-ink-900 mb-4">Contact Us</h1>
+          <p className="text-lg text-ink-600">We&rsquo;d love to hear from you.</p>
+        </div>
+      </section>
 
-      <div className="grid lg:grid-cols-2 gap-10">
-        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
+      <div className="container-page py-14 sm:py-20 grid lg:grid-cols-2 gap-10">
+        <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-4">
           <InfoRow icon={Phone} title="Phone" value={CLINIC.phone} />
           <InfoRow icon={Mail} title="Email" value={CLINIC.email} />
           <InfoRow icon={MapPin} title="Address" value={CLINIC.address} />
-          <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-white shadow-lg">
+          <div className="card p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Clock className="w-5 h-5 text-[#0EA5E9]" />
-              <h3 className="font-bold text-[#0F172A]">Working Hours</h3>
+              <Clock className="w-5 h-5 text-brand-600" />
+              <h3 className="font-semibold text-ink-900">Working Hours</h3>
             </div>
             <ul className="space-y-2 text-sm">
               {CLINIC.hours.map((h) => (
-                <li key={h.day} className="flex justify-between text-[#64748B]">
+                <li key={h.day} className="flex justify-between text-ink-500">
                   <span>{h.day}</span>
-                  <span className="font-medium text-[#0F172A]">{h.time}</span>
+                  <span className="font-medium text-ink-900">{h.time}</span>
                 </li>
               ))}
             </ul>
@@ -56,56 +59,53 @@ export default function Contact() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 16 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-white shadow-lg"
+          className="card p-8"
         >
           {sent ? (
             <div className="text-center py-10">
-              <CheckCircle className="w-14 h-14 text-[#22C55E] mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-[#0F172A] mb-2">Message received</h3>
-              <p className="text-[#64748B]">
-                Thanks for reaching out - for appointment changes, please use your patient dashboard so our
+              <CheckCircle className="w-12 h-12 text-success-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-ink-900 mb-2">Message received</h3>
+              <p className="text-ink-500 text-sm">
+                Thanks for reaching out &mdash; for appointment changes, please use your patient dashboard so our
                 team can respond fastest.
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Name</label>
+                <label className="field-label">Name</label>
                 <input
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
+                  className="input-field"
                 />
-                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                {errors.name && <p className="field-error">{errors.name}</p>}
               </div>
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Email</label>
+                <label className="field-label">Email</label>
                 <input
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
+                  className="input-field"
                 />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                {errors.email && <p className="field-error">{errors.email}</p>}
               </div>
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Message</label>
+                <label className="field-label">Message</label>
                 <textarea
                   rows={5}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] resize-none"
+                  className="input-field resize-none"
                 />
-                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                {errors.message && <p className="field-error">{errors.message}</p>}
               </div>
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] text-white font-semibold hover:shadow-lg hover:shadow-[#0EA5E9]/30 transition-all"
-              >
+              <button type="submit" className="btn btn-primary w-full">
                 <Send className="w-4 h-4" />
                 Send Message
               </button>
@@ -119,13 +119,13 @@ export default function Contact() {
 
 function InfoRow({ icon: Icon, title, value }) {
   return (
-    <div className="flex items-center gap-4 p-5 rounded-2xl bg-white/60 backdrop-blur-sm border border-white shadow-lg">
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center flex-shrink-0">
-        <Icon className="w-6 h-6 text-white" />
+    <div className="card p-5 flex items-center gap-4">
+      <div className="w-11 h-11 rounded-md bg-brand-50 flex items-center justify-center shrink-0">
+        <Icon className="w-5 h-5 text-brand-700" />
       </div>
       <div>
-        <p className="text-sm text-[#64748B]">{title}</p>
-        <p className="font-semibold text-[#0F172A]">{value}</p>
+        <p className="text-sm text-ink-500">{title}</p>
+        <p className="font-semibold text-ink-900">{value}</p>
       </div>
     </div>
   );

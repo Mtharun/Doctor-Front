@@ -91,26 +91,17 @@ export default function BookAppointment() {
 
   if (submitted) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-6">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="max-w-md w-full bg-white/60 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white text-center"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring" }}
-            className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#22C55E] to-[#16A34A] flex items-center justify-center"
-          >
-            <CheckCircle className="w-12 h-12 text-white" />
-          </motion.div>
-          <h2 className="text-3xl font-bold text-[#0F172A] mb-4">Appointment Requested!</h2>
-          <p className="text-[#64748B] mb-6">
-            Your request has been sent to the clinic and is <strong>pending confirmation</strong>. You'll see the
-            status update in My Appointments once it's reviewed.
+      <div className="min-h-[80vh] flex items-center justify-center p-6 bg-ink-50">
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="max-w-md w-full card p-10 sm:p-12 text-center">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-success-50 flex items-center justify-center">
+            <CheckCircle className="w-8 h-8 text-success-600" />
+          </div>
+          <h2 className="text-2xl font-serif font-semibold text-ink-900 mb-3">Appointment Requested</h2>
+          <p className="text-ink-500 mb-6 text-sm leading-relaxed">
+            Your request has been sent to the clinic and is <strong className="text-ink-800">pending confirmation</strong>.
+            You'll see the status update in My Appointments once it's reviewed.
           </p>
-          <Link to="/patient/appointments" className="block w-full py-3 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] text-white font-semibold">
+          <Link to="/patient/appointments" className="btn btn-primary w-full">
             View My Appointments
           </Link>
         </motion.div>
@@ -119,31 +110,26 @@ export default function BookAppointment() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 sm:py-12">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <Link to="/patient/dashboard" className="inline-flex items-center gap-2 text-[#0EA5E9] hover:text-[#0284C7] transition-colors mb-6">
+    <div className="container-page max-w-4xl py-8 sm:py-12">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+        <Link to="/patient/dashboard" className="inline-flex items-center gap-2 text-sm text-ink-500 hover:text-ink-900 transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" /> Back to Dashboard
         </Link>
 
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-[#0F172A] mb-2">Book Appointment</h1>
-          <p className="text-lg sm:text-xl text-[#64748B]">Schedule your next dental visit</p>
+          <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-ink-900 mb-1">Book Appointment</h1>
+          <p className="text-ink-500">Schedule your next dental visit</p>
         </div>
 
         {loadError && <ErrorState message={loadError} onRetry={loadOptions} />}
         {!loadError && !services && <LoadingState label="Loading services and dentists..." />}
 
         {services && dentists && (
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-xl border border-white">
+          <div className="card p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Select Service</label>
-                <select
-                  value={serviceId}
-                  onChange={(e) => setServiceId(e.target.value)}
-                  required
-                  className="w-full px-4 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
-                >
+                <label className="field-label">Select Service</label>
+                <select value={serviceId} onChange={(e) => setServiceId(e.target.value)} required className="input-field">
                   <option value="">Choose a service</option>
                   {services.map((s) => (
                     <option key={s.id} value={s.id}>{s.name} ({s.durationMinutes} min{s.price != null ? ` · $${s.price}` : ""})</option>
@@ -152,13 +138,8 @@ export default function BookAppointment() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Select Dentist</label>
-                <select
-                  value={dentistId}
-                  onChange={(e) => setDentistId(e.target.value)}
-                  required
-                  className="w-full px-4 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
-                >
+                <label className="field-label">Select Dentist</label>
+                <select value={dentistId} onChange={(e) => setDentistId(e.target.value)} required className="input-field">
                   <option value="">Choose a dentist</option>
                   {dentists.map((d) => (
                     <option key={d.id} value={d.id}>{d.name} - {d.specialty}</option>
@@ -167,27 +148,27 @@ export default function BookAppointment() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Select Date</label>
+                <label className="field-label">Select Date</label>
                 <div className="relative">
-                  <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B] pointer-events-none" />
+                  <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-ink-400 pointer-events-none" />
                   <input
                     type="date"
                     min={todayISO()}
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     required
-                    className="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
+                    className="input-field pl-10"
                   />
                 </div>
               </div>
 
               {dentistId && date && (
                 <div>
-                  <label className="block text-sm font-medium text-[#0F172A] mb-2">Select Time Slot</label>
+                  <label className="field-label">Select Time Slot</label>
                   {slotsLoading && <LoadingState label="Checking availability..." />}
-                  {slotsError && <p className="text-red-500 text-sm">{slotsError}</p>}
+                  {slotsError && <p className="field-error">{slotsError}</p>}
                   {slots && slots.length === 0 && (
-                    <p className="text-sm text-[#64748B] bg-gray-50 rounded-xl p-4">
+                    <p className="text-sm text-ink-500 bg-ink-50 rounded-md p-4">
                       {selectedDentist?.name} doesn't work on this day. Please choose another date.
                     </p>
                   )}
@@ -199,12 +180,12 @@ export default function BookAppointment() {
                           key={s.time}
                           disabled={!s.available}
                           onClick={() => setTime(s.time)}
-                          className={`py-3 rounded-xl text-sm font-semibold transition-all ${
+                          className={`py-2.5 rounded-md text-sm font-medium transition-colors border ${
                             time === s.time
-                              ? "bg-[#0EA5E9] text-white shadow-lg"
+                              ? "bg-brand-600 border-brand-600 text-white"
                               : s.available
-                              ? "bg-white border border-gray-200 text-[#0F172A] hover:border-[#0EA5E9]"
-                              : "bg-gray-100 text-gray-400 cursor-not-allowed line-through"
+                              ? "bg-white border-ink-200 text-ink-800 hover:border-brand-400"
+                              : "bg-ink-50 border-ink-100 text-ink-300 cursor-not-allowed line-through"
                           }`}
                         >
                           {s.time}
@@ -216,47 +197,43 @@ export default function BookAppointment() {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Reason for Visit</label>
+                <label className="field-label">Reason for Visit</label>
                 <div className="relative">
-                  <FileText className="absolute left-4 top-4 w-5 h-5 text-[#64748B]" />
+                  <FileText className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-ink-400" />
                   <textarea
                     value={reason}
                     onChange={(e) => setReason(e.target.value)}
                     placeholder="Describe the reason for your visit..."
                     rows={4}
                     required
-                    className="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] resize-none"
+                    className="input-field pl-10 resize-none"
                   />
                 </div>
               </div>
 
               {(selectedService || selectedDentist || date || time) && (
-                <div className="bg-[#0EA5E9]/5 rounded-2xl p-6">
-                  <h4 className="font-semibold text-[#0F172A] mb-3 flex items-center gap-2">
-                    <Stethoscope className="w-4 h-4 text-[#0EA5E9]" /> Appointment Summary
+                <div className="bg-brand-50 rounded-md p-5">
+                  <h4 className="font-semibold text-ink-900 mb-3 flex items-center gap-2 text-sm">
+                    <Stethoscope className="w-4 h-4 text-brand-700" /> Appointment Summary
                   </h4>
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-[#64748B]">Service:</span><span className="font-medium text-[#0F172A]">{selectedService?.name || "—"}</span></div>
-                    <div className="flex justify-between"><span className="text-[#64748B]">Dentist:</span><span className="font-medium text-[#0F172A]">{selectedDentist?.name || "—"}</span></div>
-                    <div className="flex justify-between"><span className="text-[#64748B]">Date:</span><span className="font-medium text-[#0F172A]">{date || "—"}</span></div>
-                    <div className="flex justify-between"><span className="text-[#64748B]">Time:</span><span className="font-medium text-[#0F172A]">{time || "—"}</span></div>
+                    <div className="flex justify-between"><span className="text-ink-500">Service:</span><span className="font-medium text-ink-900">{selectedService?.name || "—"}</span></div>
+                    <div className="flex justify-between"><span className="text-ink-500">Dentist:</span><span className="font-medium text-ink-900">{selectedDentist?.name || "—"}</span></div>
+                    <div className="flex justify-between"><span className="text-ink-500">Date:</span><span className="font-medium text-ink-900">{date || "—"}</span></div>
+                    <div className="flex justify-between"><span className="text-ink-500">Time:</span><span className="font-medium text-ink-900">{time || "—"}</span></div>
                   </div>
                 </div>
               )}
 
               {submitError && (
-                <div className="p-4 rounded-xl bg-[#FEF2F2] border border-[#EF4444]/20 text-sm text-[#EF4444]">{submitError}</div>
+                <div className="p-4 rounded-md bg-danger-50 border border-danger-600/15 text-sm text-danger-600">{submitError}</div>
               )}
 
               <div className="flex gap-4">
-                <Link to="/patient/dashboard" className="flex-1 py-4 rounded-xl border-2 border-gray-200 text-[#64748B] font-semibold hover:bg-gray-50 transition-all text-center">
+                <Link to="/patient/dashboard" className="btn btn-outline flex-1">
                   Cancel
                 </Link>
-                <button
-                  type="submit"
-                  disabled={!canSubmit}
-                  className="flex-1 py-4 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-                >
+                <button type="submit" disabled={!canSubmit} className="btn btn-primary flex-1">
                   {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
                   {submitting ? "Booking..." : "Confirm Appointment"}
                 </button>

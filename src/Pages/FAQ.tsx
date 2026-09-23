@@ -15,33 +15,40 @@ export default function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
-      <h1 className="text-4xl sm:text-5xl font-bold text-[#0F172A] mb-4 text-center">Frequently Asked Questions</h1>
-      <p className="text-lg text-[#64748B] text-center mb-12">Answers to what patients ask us most often.</p>
+    <div>
+      <section className="bg-sand-50 border-b border-ink-200">
+        <div className="container-page py-16 sm:py-20 text-center">
+          <span className="eyebrow mb-4 justify-center">Support</span>
+          <h1 className="text-4xl sm:text-5xl font-serif font-semibold text-ink-900 mb-4">Frequently Asked Questions</h1>
+          <p className="text-lg text-ink-600">Answers to what patients ask us most often.</p>
+        </div>
+      </section>
 
-      <div className="space-y-4">
-        {FAQS.map((item, i) => (
-          <motion.div
-            key={item.q}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-            className="bg-white/60 backdrop-blur-sm border border-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-          >
-            <button
-              onClick={() => setOpen(open === i ? -1 : i)}
-              className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
-              aria-expanded={open === i}
+      <div className="container-page max-w-3xl py-14 sm:py-20">
+        <div className="space-y-3">
+          {FAQS.map((item, i) => (
+            <motion.div
+              key={item.q}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04 }}
+              className="card overflow-hidden"
             >
-              <span className="font-semibold text-[#0F172A]">{item.q}</span>
-              <ChevronDown className={`w-5 h-5 text-[#0EA5E9] flex-shrink-0 transition-transform ${open === i ? "rotate-180" : ""}`} />
-            </button>
-            {open === i && (
-              <div className="px-6 pb-5 text-sm text-[#64748B] leading-relaxed">{item.a}</div>
-            )}
-          </motion.div>
-        ))}
+              <button
+                onClick={() => setOpen(open === i ? -1 : i)}
+                className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                aria-expanded={open === i}
+              >
+                <span className="font-medium text-ink-900 text-sm">{item.q}</span>
+                <ChevronDown className={`w-4 h-4 text-ink-400 shrink-0 transition-transform ${open === i ? "rotate-180" : ""}`} />
+              </button>
+              {open === i && (
+                <div className="px-6 pb-5 text-sm text-ink-500 leading-relaxed">{item.a}</div>
+              )}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

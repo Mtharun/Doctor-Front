@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { FileText, Download, Eye, ArrowLeft, Loader2, X, Trash2 } from "lucide-react";
+import { FileText, Download, Eye, ArrowLeft, Loader2, X, Trash2, Plus } from "lucide-react";
 import { ReportsApi } from "../api/reports.js";
 import { PatientsApi } from "../api/patients.js";
 import { BASE_URL } from "../api/client.js";
@@ -13,9 +13,9 @@ import EmptyState from "../components/ui/EmptyState.jsx";
 import ConfirmDialog from "../components/ui/ConfirmDialog.jsx";
 
 const TYPE_STYLES = {
-  "X-Ray": "bg-[#0EA5E9]/10 text-[#0EA5E9]",
-  Lab: "bg-[#22C55E]/10 text-[#22C55E]",
-  Report: "bg-[#8B5CF6]/10 text-[#8B5CF6]",
+  "X-Ray": "bg-info-50 text-info-600 border-info-600/15",
+  Lab: "bg-success-50 text-success-600 border-success-600/15",
+  Report: "bg-brand-50 text-brand-700 border-brand-600/15",
 };
 
 function UploadReportModal({ onClose, onDone }) {
@@ -53,20 +53,20 @@ function UploadReportModal({ onClose, onDone }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 bg-[#0F172A]/40 backdrop-blur-sm">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 bg-ink-900/45">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-ink-200 p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-[#0F172A]">Upload Report</h3>
-          <button onClick={onClose} aria-label="Close"><X className="w-5 h-5 text-[#64748B]" /></button>
+          <h3 className="text-lg font-semibold text-ink-900">Upload Report</h3>
+          <button onClick={onClose} aria-label="Close"><X className="w-5 h-5 text-ink-400" /></button>
         </div>
 
         <form onSubmit={submit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">Patient</label>
+            <label className="field-label">Patient</label>
             {!patients ? (
               <LoadingState label="Loading patients..." />
             ) : (
-              <select value={form.patientId} onChange={(e) => setForm({ ...form, patientId: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all">
+              <select value={form.patientId} onChange={(e) => setForm({ ...form, patientId: e.target.value })} className="input-field">
                 <option value="">Select a patient</option>
                 {patients.map((p) => (
                   <option key={p.id} value={p.id}>{p.name} ({p.email})</option>
@@ -75,35 +75,35 @@ function UploadReportModal({ onClose, onDone }) {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">Title</label>
-            <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" placeholder="e.g. Dental X-Ray Report" />
+            <label className="field-label">Title</label>
+            <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="input-field" placeholder="e.g. Dental X-Ray Report" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Type</label>
-              <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all">
+              <label className="field-label">Type</label>
+              <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="input-field">
                 <option value="Report">Report</option>
                 <option value="X-Ray">X-Ray</option>
                 <option value="Lab">Lab</option>
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Doctor</label>
-              <input value={form.doctor} onChange={(e) => setForm({ ...form, doctor: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" placeholder="Dr. ..." />
+              <label className="field-label">Doctor</label>
+              <input value={form.doctor} onChange={(e) => setForm({ ...form, doctor: e.target.value })} className="input-field" placeholder="Dr. ..." />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">Notes</label>
-            <textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all" />
+            <label className="field-label">Notes</label>
+            <textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} rows={3} className="input-field resize-none" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#0F172A] mb-2">File (PDF/Image)</label>
-            <input type="file" accept="application/pdf,image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full text-sm" />
+            <label className="field-label">File (PDF/Image)</label>
+            <input type="file" accept="application/pdf,image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full text-sm text-ink-600" />
           </div>
 
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && <p className="field-error">{error}</p>}
 
-          <button type="submit" disabled={saving} className="w-full py-3 rounded-xl bg-[#0EA5E9] text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50">
+          <button type="submit" disabled={saving} className="btn btn-primary w-full">
             {saving && <Loader2 className="w-4 h-4 animate-spin" />}
             {saving ? "Uploading..." : "Upload Report"}
           </button>
@@ -147,20 +147,20 @@ export default function Reports() {
   };
 
   return (
-    <div className={`max-w-6xl mx-auto px-6 py-8 sm:py-12`}>
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <Link to={isAdmin ? "/admin/dashboard" : "/patient/dashboard"} className="inline-flex items-center gap-2 text-[#0EA5E9] hover:text-[#0284C7] transition-colors mb-6">
+    <div className={`container-page py-8 sm:py-12`}>
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+        <Link to={isAdmin ? "/admin/dashboard" : "/patient/dashboard"} className="inline-flex items-center gap-2 text-sm text-ink-500 hover:text-ink-900 transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" /> Back to Dashboard
         </Link>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-[#0F172A] mb-2">Medical Reports</h1>
-            <p className="text-lg sm:text-xl text-[#64748B]">{isAdmin ? "Manage patient reports" : "View your dental records"}</p>
+            <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-ink-900 mb-1">Medical Reports</h1>
+            <p className="text-ink-500">{isAdmin ? "Manage patient reports" : "View your dental records"}</p>
           </div>
           {isAdmin && (
-            <button onClick={() => setShowUpload(true)} className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] text-white font-semibold hover:shadow-lg transition-all">
-              + Upload Report
+            <button onClick={() => setShowUpload(true)} className="btn btn-primary">
+              <Plus className="w-4 h-4" /> Upload Report
             </button>
           )}
         </div>
@@ -173,51 +173,51 @@ export default function Reports() {
         )}
 
         {reports && reports.length > 0 && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {reports.map((report, i) => (
               <motion.div
                 key={report.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                transition={{ delay: i * 0.04 }}
+                className="card p-6"
               >
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                    <FileText className="w-8 h-8 text-white" />
+                <div className="flex items-start gap-5">
+                  <div className="shrink-0 w-12 h-12 rounded-md bg-brand-50 flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-brand-700" />
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                       <div>
-                        <h3 className="text-xl font-bold text-[#0F172A] mb-1">{report.title}</h3>
-                        <p className="text-sm text-[#64748B]">
+                        <h3 className="text-lg font-semibold text-ink-900 mb-1">{report.title}</h3>
+                        <p className="text-sm text-ink-500">
                           {new Date(report.date).toLocaleDateString()}{report.doctor ? ` · Dr. ${report.doctor}` : ""}
                           {isAdmin && ` · ${report.patient.name}`}
                         </p>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${TYPE_STYLES[report.type] || "bg-gray-100 text-gray-600"}`}>{report.type}</span>
+                      <span className={`badge ${TYPE_STYLES[report.type] || "bg-ink-100 text-ink-600 border-ink-300"}`}>{report.type}</span>
                     </div>
 
                     {report.notes && (
-                      <div className="bg-gray-50 rounded-xl p-4 mb-4">
-                        <p className="text-sm text-[#64748B]">{report.notes}</p>
+                      <div className="bg-ink-50 rounded-md p-3.5 mb-4">
+                        <p className="text-sm text-ink-600">{report.notes}</p>
                       </div>
                     )}
 
                     <div className="flex flex-wrap gap-3">
                       {report.fileUrl && (
                         <>
-                          <a href={`${BASE_URL}${report.fileUrl}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0EA5E9]/10 text-[#0EA5E9] font-semibold hover:bg-[#0EA5E9]/20 transition-all">
+                          <a href={`${BASE_URL}${report.fileUrl}`} target="_blank" rel="noreferrer" className="btn btn-ghost btn-sm">
                             <Eye className="w-4 h-4" /> View
                           </a>
-                          <a href={`${BASE_URL}${report.fileUrl}`} download className="flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-gray-200 text-[#64748B] font-semibold hover:bg-gray-50 transition-all">
+                          <a href={`${BASE_URL}${report.fileUrl}`} download className="btn btn-outline btn-sm">
                             <Download className="w-4 h-4" /> Download
                           </a>
                         </>
                       )}
                       {isAdmin && (
-                        <button onClick={() => setDeleteTarget(report)} className="flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-gray-200 text-[#EF4444] font-semibold hover:bg-red-50 transition-all">
+                        <button onClick={() => setDeleteTarget(report)} className="btn btn-outline btn-sm text-danger-600 border-danger-600/25 hover:bg-danger-50">
                           <Trash2 className="w-4 h-4" /> Delete
                         </button>
                       )}

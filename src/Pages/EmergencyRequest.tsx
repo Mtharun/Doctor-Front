@@ -58,33 +58,29 @@ export default function EmergencyRequest() {
 
   if (submitted) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-6">
+      <div className="min-h-[80vh] flex items-center justify-center p-6 bg-ink-50">
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="max-w-md w-full bg-white/60 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white text-center"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-md w-full card p-10 sm:p-12 text-center"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring" }}
-            className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#22C55E] to-[#16A34A] flex items-center justify-center"
-          >
-            <CheckCircle className="w-12 h-12 text-white" />
-          </motion.div>
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-success-50 flex items-center justify-center">
+            <CheckCircle className="w-8 h-8 text-success-600" />
+          </div>
 
-          <h2 className="text-3xl font-bold text-[#0F172A] mb-4">Request Received!</h2>
-          <p className="text-[#64748B] mb-6">
+          <h2 className="text-2xl font-serif font-semibold text-ink-900 mb-3">Request Received</h2>
+          <p className="text-ink-500 mb-6 text-sm leading-relaxed">
             Our clinic team has been notified and will contact you as soon as possible.
           </p>
 
-          <div className="bg-[#EF4444]/10 rounded-2xl p-4 mb-6">
-            <p className="text-sm font-semibold text-[#EF4444]">
-              This is not an emergency medical service. If this is life-threatening, call your local emergency number now.
+          <div className="bg-danger-50 rounded-md p-4 mb-6 text-left">
+            <p className="text-sm font-medium text-danger-600">
+              This is not an emergency medical service. If this is life-threatening, call your local emergency
+              number now.
             </p>
           </div>
 
-          <Link to="/patient/dashboard" className="block w-full py-3 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] text-white font-semibold">
+          <Link to="/patient/dashboard" className="btn btn-primary w-full">
             Back to Dashboard
           </Link>
         </motion.div>
@@ -93,37 +89,33 @@ export default function EmergencyRequest() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] via-[#FEF2F2] to-[#FEE2E2]">
-      <header className="bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white">
+    <div className="min-h-screen bg-ink-50">
+      <header className="bg-danger-600 text-white">
         <div className="max-w-4xl mx-auto px-6 py-6">
-          <Link to="/patient/dashboard" className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-4">
+          <Link to="/patient/dashboard" className="inline-flex items-center gap-2 text-white/85 hover:text-white mb-4 text-sm">
             <ArrowLeft className="w-4 h-4" /> Back to Dashboard
           </Link>
 
           <div className="flex items-center gap-4">
-            <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center"
-            >
-              <AlertCircle className="w-8 h-8" />
-            </motion.div>
+            <div className="w-[52px] h-[52px] rounded-md bg-white/15 flex items-center justify-center shrink-0">
+              <AlertCircle className="w-6 h-6" />
+            </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Emergency Request</h1>
-              <p className="text-white/90">Our team will respond as soon as possible</p>
+              <h1 className="text-2xl sm:text-3xl font-serif font-semibold">Emergency Request</h1>
+              <p className="text-white/85 text-sm">Our team will respond as soon as possible</p>
             </div>
           </div>
         </div>
       </header>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border border-white">
-          <div className="mb-8 p-6 rounded-2xl bg-gradient-to-r from-[#EF4444]/10 to-[#DC2626]/10 border-l-4 border-[#EF4444]">
-            <div className="flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-[#EF4444] flex-shrink-0 mt-1" />
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="card p-6 sm:p-8">
+          <div className="mb-8 p-5 rounded-md bg-danger-50 border-l-4 border-danger-600">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-danger-600 shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-[#EF4444] mb-2">This form is not a substitute for emergency services</h3>
-                <p className="text-sm text-[#64748B]">
+                <h3 className="font-semibold text-danger-600 mb-1.5 text-sm">This form is not a substitute for emergency services</h3>
+                <p className="text-sm text-ink-600">
                   Use this form for urgent dental issues (severe pain, broken tooth, lost filling). If you are
                   experiencing a life-threatening emergency, call your local emergency number immediately.
                 </p>
@@ -131,95 +123,91 @@ export default function EmergencyRequest() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} noValidate className="space-y-5">
+            <div className="grid md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Your Name *</label>
+                <label className="field-label">Your Name *</label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B]" />
-                  <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe" className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#EF4444]" />
+                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-ink-400" />
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe" className="input-field pl-10" />
                 </div>
-                {fieldErrors.name && <p className="text-red-500 text-sm mt-1">{fieldErrors.name}</p>}
+                {fieldErrors.name && <p className="field-error">{fieldErrors.name}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#0F172A] mb-2">Phone Number *</label>
+                <label className="field-label">Phone Number *</label>
                 <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B]" />
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 (555) 123-4567" className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#EF4444]" />
+                  <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-ink-400" />
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 (555) 123-4567" className="input-field pl-10" />
                 </div>
-                {fieldErrors.phone && <p className="text-red-500 text-sm mt-1">{fieldErrors.phone}</p>}
+                {fieldErrors.phone && <p className="field-error">{fieldErrors.phone}</p>}
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Current Location *</label>
+              <label className="field-label">Current Location *</label>
               <div className="relative">
-                <MapPin className="absolute left-4 top-4 w-5 h-5 text-[#64748B]" />
-                <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Your current address or location" className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#EF4444]" />
+                <MapPin className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-ink-400" />
+                <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Your current address or location" className="input-field pl-10" />
               </div>
-              {fieldErrors.location && <p className="text-red-500 text-sm mt-1">{fieldErrors.location}</p>}
+              {fieldErrors.location && <p className="field-error">{fieldErrors.location}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Priority Level *</label>
-              <select name="priority" value={formData.priority} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#EF4444]">
-                <option value="critical">🔴 Critical - Severe pain/bleeding</option>
-                <option value="high">🟠 High - Urgent attention needed</option>
-                <option value="medium">🟡 Medium - Can wait a few hours</option>
+              <label className="field-label">Priority Level *</label>
+              <select name="priority" value={formData.priority} onChange={handleChange} className="input-field">
+                <option value="critical">Critical &mdash; Severe pain/bleeding</option>
+                <option value="high">High &mdash; Urgent attention needed</option>
+                <option value="medium">Medium &mdash; Can wait a few hours</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Problem Description *</label>
+              <label className="field-label">Problem Description *</label>
               <div className="relative">
-                <FileText className="absolute left-4 top-4 w-5 h-5 text-[#64748B]" />
-                <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Describe your emergency in detail (symptoms, when it started, severity, etc.)" rows={6} className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#EF4444] resize-none" />
+                <FileText className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-ink-400" />
+                <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Describe your emergency in detail (symptoms, when it started, severity, etc.)" rows={6} className="input-field pl-10 resize-none" />
               </div>
-              {fieldErrors.description && <p className="text-red-500 text-sm mt-1">{fieldErrors.description}</p>}
+              {fieldErrors.description && <p className="field-error">{fieldErrors.description}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">Upload Image (Optional)</label>
-              <label className="block border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-[#EF4444] transition-all cursor-pointer bg-white">
-                <Upload className="w-12 h-12 mx-auto text-[#64748B] mb-4" />
-                <p className="text-sm text-[#64748B] mb-2">{image ? image.name : "Click to upload or drag and drop"}</p>
-                <p className="text-xs text-[#64748B]">PNG, JPG or PDF up to 10MB</p>
+              <label className="field-label">Upload Image (Optional)</label>
+              <label className="block border-2 border-dashed border-ink-300 rounded-md p-8 text-center hover:border-danger-600 transition-colors cursor-pointer bg-white">
+                <Upload className="w-9 h-9 mx-auto text-ink-400 mb-3" />
+                <p className="text-sm text-ink-600 mb-1">{image ? image.name : "Click to upload or drag and drop"}</p>
+                <p className="text-xs text-ink-400">PNG, JPG or PDF up to 10MB</p>
                 <input type="file" className="hidden" accept="image/*,application/pdf" onChange={(e) => setImage(e.target.files?.[0] || null)} />
               </label>
             </div>
 
-            {error && <div className="p-4 rounded-xl bg-[#FEF2F2] border border-[#EF4444]/20 text-sm text-[#EF4444]">{error}</div>}
+            {error && <div className="p-4 rounded-md bg-danger-50 border border-danger-600/15 text-sm text-danger-600">{error}</div>}
 
             <div className="flex gap-4">
-              <Link to="/patient/dashboard" className="flex-1 py-4 rounded-xl border-2 border-gray-200 text-[#64748B] font-semibold hover:bg-gray-50 transition-all text-center">
+              <Link to="/patient/dashboard" className="btn btn-outline flex-1">
                 Cancel
               </Link>
-              <button
-                type="submit"
-                disabled={submitting}
-                className="flex-1 py-4 rounded-xl bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-semibold hover:shadow-2xl transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <AlertCircle className="w-5 h-5" />}
+              <button type="submit" disabled={submitting} className="btn btn-danger flex-1">
+                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <AlertCircle className="w-4 h-4" />}
                 {submitting ? "Submitting..." : "Request Emergency Help"}
               </button>
             </div>
           </form>
 
-          <div className="mt-8 pt-8 border-t border-gray-200">
+          <div className="mt-8 pt-8 border-t border-ink-200">
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-[#0EA5E9]/5">
-                <Phone className="w-5 h-5 text-[#0EA5E9]" />
+              <div className="flex items-center gap-3 p-4 rounded-md bg-brand-50">
+                <Phone className="w-5 h-5 text-brand-700 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-[#0F172A]">Emergency Hotline</p>
-                  <p className="text-sm text-[#64748B]">{CLINIC.emergencyPhone}</p>
+                  <p className="text-sm font-semibold text-ink-900">Emergency Hotline</p>
+                  <p className="text-sm text-ink-500">{CLINIC.emergencyPhone}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-[#22C55E]/5">
-                <AlertCircle className="w-5 h-5 text-[#22C55E]" />
+              <div className="flex items-center gap-3 p-4 rounded-md bg-success-50">
+                <AlertCircle className="w-5 h-5 text-success-600 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-[#0F172A]">Life-threatening emergency?</p>
-                  <p className="text-sm text-[#64748B]">Call your local emergency number immediately</p>
+                  <p className="text-sm font-semibold text-ink-900">Life-threatening emergency?</p>
+                  <p className="text-sm text-ink-500">Call your local emergency number immediately</p>
                 </div>
               </div>
             </div>

@@ -1,1 +1,283 @@
 @import "tailwindcss";
+
+/*
+  =========================================================
+  DENTALCARE DESIGN SYSTEM
+  A restrained, clinical, premium palette + type system.
+  No glassmorphism, no gradients-as-decoration, no blur.
+  =========================================================
+*/
+
+@theme {
+  /* ---- Brand (deep clinical teal) ---- */
+  --color-brand-50: #eefaf8;
+  --color-brand-100: #d3f1ec;
+  --color-brand-200: #a8e2d8;
+  --color-brand-300: #74cbbc;
+  --color-brand-400: #47ad9d;
+  --color-brand-500: #2e9184;
+  --color-brand-600: #21756c;
+  --color-brand-700: #1c5e58;
+  --color-brand-800: #194b47;
+  --color-brand-900: #163f3c;
+
+  /* ---- Ink (neutral navy-gray, text + borders) ---- */
+  --color-ink-50: #f8fafa;
+  --color-ink-100: #f0f3f3;
+  --color-ink-200: #e2e8e7;
+  --color-ink-300: #cbd5d3;
+  --color-ink-400: #9aa8a6;
+  --color-ink-500: #5e6d6b;
+  --color-ink-600: #4f5c5a;
+  --color-ink-700: #384442;
+  --color-ink-800: #232d2b;
+  --color-ink-900: #131b1a;
+
+  /* ---- Warm surface (hero/editorial backgrounds) ---- */
+  --color-sand-50: #fbf9f5;
+  --color-sand-100: #f5f0e6;
+
+  /* ---- Status (kept legible + standard) ---- */
+  --color-success-50: #f0faf4;
+  --color-success-600: #197a45;
+  --color-warning-50: #fef8ec;
+  --color-warning-600: #a15c07;
+  --color-danger-50: #fdf1f0;
+  --color-danger-300: #f0a8a3;
+  --color-danger-400: #e77f78;
+  --color-danger-600: #b3261e;
+  --color-info-50: #eef6fc;
+  --color-info-600: #1c5f8a;
+
+  /* ---- Type ---- */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Lora", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* ---- Radius: restrained, not pill-everything ---- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  /* ---- Shadows: soft, ink-tinted, no color glow ---- */
+  --shadow-xs: 0 1px 2px 0 rgb(19 27 26 / 0.04);
+  --shadow-sm: 0 1px 3px 0 rgb(19 27 26 / 0.06), 0 1px 2px -1px rgb(19 27 26 / 0.06);
+  --shadow-md: 0 4px 12px -2px rgb(19 27 26 / 0.08), 0 2px 4px -2px rgb(19 27 26 / 0.05);
+  --shadow-lg: 0 12px 28px -8px rgb(19 27 26 / 0.12), 0 4px 8px -4px rgb(19 27 26 / 0.06);
+  --shadow-xl: 0 24px 48px -12px rgb(19 27 26 / 0.16);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink-800);
+    background-color: #ffffff;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    color: var(--color-ink-900);
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Page-level containers */
+  .container-page {
+    max-width: 80rem; /* 1280px */
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  .section {
+    padding-block: 4rem;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 6rem;
+    }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.5rem;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease, transform 100ms ease;
+    white-space: nowrap;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-primary {
+    background-color: var(--color-brand-600);
+    color: white;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-brand-700);
+  }
+  .btn-secondary {
+    background-color: var(--color-ink-900);
+    color: white;
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-ink-800);
+  }
+  .btn-outline {
+    background-color: transparent;
+    color: var(--color-ink-800);
+    border: 1.5px solid var(--color-ink-300);
+  }
+  .btn-outline:hover:not(:disabled) {
+    background-color: var(--color-ink-50);
+    border-color: var(--color-ink-400);
+  }
+  .btn-outline-invert {
+    background-color: transparent;
+    color: white;
+    border: 1.5px solid rgb(255 255 255 / 0.55);
+  }
+  .btn-outline-invert:hover:not(:disabled) {
+    background-color: rgb(255 255 255 / 0.12);
+    border-color: white;
+  }
+  .btn-danger {
+    background-color: var(--color-danger-600);
+    color: white;
+  }
+  .btn-danger:hover:not(:disabled) {
+    background-color: #8f1e18;
+  }
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-brand-700);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--color-brand-50);
+  }
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  /* Cards */
+  .card {
+    background-color: white;
+    border: 1px solid var(--color-ink-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .card-hover {
+    transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
+  }
+  .card-hover:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-ink-300);
+    transform: translateY(-2px);
+  }
+
+  /* Inputs */
+  .input-field {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--color-ink-200);
+    background-color: white;
+    color: var(--color-ink-900);
+    font-size: 0.9375rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .input-field::placeholder {
+    color: var(--color-ink-400);
+  }
+  .input-field:focus {
+    outline: none;
+    border-color: var(--color-brand-500);
+    box-shadow: 0 0 0 3px rgb(46 145 132 / 0.15);
+  }
+  .input-field:disabled {
+    background-color: var(--color-ink-50);
+    color: var(--color-ink-400);
+  }
+  .field-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-ink-700);
+    margin-bottom: 0.375rem;
+  }
+  .field-error {
+    font-size: 0.8125rem;
+    color: var(--color-danger-600);
+    margin-top: 0.375rem;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+  }
+
+  /* Section eyebrow label */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-700);
+  }
+
+  /* Table */
+  .table-clean {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table-clean th {
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink-500);
+    padding: 0.875rem 1rem;
+    border-bottom: 1.5px solid var(--color-ink-200);
+  }
+  .table-clean td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-ink-100);
+    font-size: 0.9375rem;
+    color: var(--color-ink-800);
+  }
+  .table-clean tbody tr:hover {
+    background-color: var(--color-ink-50);
+  }
+}

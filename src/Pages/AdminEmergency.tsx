@@ -9,16 +9,16 @@ import ErrorState from "../components/ui/ErrorState.jsx";
 import EmptyState from "../components/ui/EmptyState.jsx";
 
 const PRIORITY_STYLES = {
-  critical: "border-[#EF4444]",
-  high: "border-[#F59E0B]",
-  medium: "border-[#F59E0B]/50",
+  critical: "border-l-danger-600",
+  high: "border-l-warning-600",
+  medium: "border-l-warning-600/50",
 };
 const PRIORITY_BADGE = {
-  critical: "bg-[#EF4444] text-white animate-pulse",
-  high: "bg-[#F59E0B] text-white",
-  medium: "bg-[#F59E0B]/70 text-white",
+  critical: "bg-danger-600 text-white border-danger-600",
+  high: "bg-warning-600 text-white border-warning-600",
+  medium: "bg-warning-50 text-warning-600 border-warning-600/20",
 };
-const PRIORITY_LABEL = { critical: "🔴 CRITICAL", high: "🟠 HIGH", medium: "🟡 MEDIUM" };
+const PRIORITY_LABEL = { critical: "CRITICAL", high: "HIGH", medium: "MEDIUM" };
 
 const FILTERS = ["all", "pending", "accepted", "in_progress", "resolved", "cancelled"];
 
@@ -56,35 +56,35 @@ export default function AdminEmergency() {
   const pendingCount = requests?.filter((r) => r.status === "pending").length ?? 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] via-[#FEF2F2] to-[#FEE2E2]">
-      <header className="bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white">
+    <div className="min-h-screen bg-ink-50">
+      <header className="bg-danger-600 text-white">
         <div className="px-4 sm:px-8 py-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-4">
-              <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <AlertCircle className="w-7 h-7 sm:w-8 sm:h-8" />
-              </motion.div>
+              <div className="w-12 h-12 rounded-md bg-white/15 flex items-center justify-center">
+                <AlertCircle className="w-6 h-6" />
+              </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold">Emergency Cases</h1>
-                <p className="text-white/90 text-sm sm:text-base">Real-time emergency request monitoring</p>
+                <h1 className="text-xl sm:text-2xl font-serif font-semibold">Emergency Cases</h1>
+                <p className="text-white/85 text-sm">Real-time emergency request monitoring</p>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-4xl sm:text-5xl font-bold">{pendingCount}</div>
-              <p className="text-white/90 text-sm">Pending</p>
+              <div className="text-3xl font-serif font-semibold">{pendingCount}</div>
+              <p className="text-white/85 text-sm">Pending</p>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
         <div className="flex gap-2 mb-8 overflow-x-auto pb-1">
           {FILTERS.map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-5 py-2.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-                filter === f ? "bg-white text-[#0F172A] shadow-lg" : "bg-white/60 text-[#64748B] hover:bg-white"
+              className={`px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors border ${
+                filter === f ? "bg-ink-900 border-ink-900 text-white" : "bg-white border-ink-200 text-ink-600 hover:border-ink-300"
               }`}
             >
               {f.charAt(0).toUpperCase() + f.slice(1).replace("_", " ")}
@@ -100,40 +100,40 @@ export default function AdminEmergency() {
         )}
 
         {requests && requests.length > 0 && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {requests.map((r, i) => (
               <motion.div
                 key={r.id}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
-                className={`bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border-l-8 hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 ${PRIORITY_STYLES[r.priority]}`}
+                transition={{ delay: i * 0.05 }}
+                className={`card border-l-4 p-6 sm:p-7 ${PRIORITY_STYLES[r.priority]}`}
               >
-                <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
                   <div className="flex items-start gap-4 flex-1 min-w-[240px]">
-                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center flex-shrink-0 bg-gradient-to-br ${r.priority === "critical" ? "from-[#EF4444] to-[#DC2626]" : "from-[#F59E0B] to-[#D97706]"} shadow-lg`}>
-                      <AlertCircle className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+                    <div className="w-12 h-12 rounded-md flex items-center justify-center shrink-0 bg-danger-50">
+                      <AlertCircle className="w-6 h-6 text-danger-600" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-3 flex-wrap">
-                        <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A]">{r.name}</h3>
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${PRIORITY_BADGE[r.priority]}`}>{PRIORITY_LABEL[r.priority]}</span>
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 capitalize">{r.status.replace("_", " ")}</span>
+                      <div className="flex items-center gap-2 mb-3 flex-wrap">
+                        <h3 className="text-lg font-semibold text-ink-900">{r.name}</h3>
+                        <span className={`badge ${PRIORITY_BADGE[r.priority]}`}>{PRIORITY_LABEL[r.priority]}</span>
+                        <span className="badge bg-ink-100 text-ink-600 border-ink-300 capitalize">{r.status.replace("_", " ")}</span>
                       </div>
 
                       <div className="grid sm:grid-cols-3 gap-3 mb-4 text-sm">
-                        <span className="flex items-center gap-2 text-[#64748B]"><Phone className="w-4 h-4" /> {r.phone}</span>
-                        <span className="flex items-center gap-2 text-[#64748B]"><MapPin className="w-4 h-4" /> {r.location}</span>
-                        <span className="flex items-center gap-2 text-[#64748B]"><Clock className="w-4 h-4" /> {new Date(r.createdAt).toLocaleString()}</span>
+                        <span className="flex items-center gap-2 text-ink-500"><Phone className="w-4 h-4" /> {r.phone}</span>
+                        <span className="flex items-center gap-2 text-ink-500"><MapPin className="w-4 h-4" /> {r.location}</span>
+                        <span className="flex items-center gap-2 text-ink-500"><Clock className="w-4 h-4" /> {new Date(r.createdAt).toLocaleString()}</span>
                       </div>
 
-                      <div className="bg-gray-50 rounded-xl p-4">
-                        <h4 className="font-semibold text-[#0F172A] mb-2 text-sm">Problem Description:</h4>
-                        <p className="text-[#64748B] text-sm">{r.description}</p>
+                      <div className="bg-ink-50 rounded-md p-4">
+                        <h4 className="font-semibold text-ink-900 mb-1.5 text-sm">Problem Description</h4>
+                        <p className="text-ink-600 text-sm">{r.description}</p>
                       </div>
                       {r.imageUrl && (
-                        <a href={`${BASE_URL}${r.imageUrl}`} target="_blank" rel="noreferrer" className="inline-block mt-3 text-sm text-[#0EA5E9] font-semibold">
-                          View attached image →
+                        <a href={`${BASE_URL}${r.imageUrl}`} target="_blank" rel="noreferrer" className="inline-block mt-3 text-sm text-brand-700 font-semibold">
+                          View attached image &rarr;
                         </a>
                       )}
                     </div>
@@ -142,26 +142,26 @@ export default function AdminEmergency() {
 
                 {!["resolved", "cancelled"].includes(r.status) && (
                   <div className="flex flex-wrap gap-3">
-                    <a href={`tel:${r.phone}`} className="flex-1 min-w-[140px] flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] text-white font-semibold hover:shadow-lg transition-all">
-                      <Phone className="w-5 h-5" /> Call Patient
+                    <a href={`tel:${r.phone}`} className="btn btn-primary flex-1 min-w-[140px]">
+                      <Phone className="w-4 h-4" /> Call Patient
                     </a>
                     {r.status === "pending" && (
-                      <button onClick={() => setStatus(r.id, "accepted")} disabled={busyId === r.id} className="flex-1 min-w-[140px] flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#22C55E] to-[#16A34A] text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50">
-                        {busyId === r.id ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle className="w-5 h-5" />} Accept Case
+                      <button onClick={() => setStatus(r.id, "accepted")} disabled={busyId === r.id} className="btn flex-1 min-w-[140px] bg-success-50 text-success-600 hover:bg-success-50/70">
+                        {busyId === r.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />} Accept Case
                       </button>
                     )}
                     {r.status === "accepted" && (
-                      <button onClick={() => setStatus(r.id, "in_progress")} disabled={busyId === r.id} className="flex-1 min-w-[140px] px-6 py-3 rounded-xl bg-[#8B5CF6]/10 text-[#8B5CF6] font-semibold hover:bg-[#8B5CF6]/20 transition-all disabled:opacity-50">
+                      <button onClick={() => setStatus(r.id, "in_progress")} disabled={busyId === r.id} className="btn flex-1 min-w-[140px] bg-info-50 text-info-600 hover:bg-info-50/70">
                         Mark In Progress
                       </button>
                     )}
                     {["accepted", "in_progress"].includes(r.status) && (
-                      <button onClick={() => setStatus(r.id, "resolved")} disabled={busyId === r.id} className="flex-1 min-w-[140px] px-6 py-3 rounded-xl bg-[#22C55E]/10 text-[#22C55E] font-semibold hover:bg-[#22C55E]/20 transition-all disabled:opacity-50">
+                      <button onClick={() => setStatus(r.id, "resolved")} disabled={busyId === r.id} className="btn flex-1 min-w-[140px] bg-success-50 text-success-600 hover:bg-success-50/70">
                         Mark Resolved
                       </button>
                     )}
-                    <button onClick={() => setStatus(r.id, "cancelled")} disabled={busyId === r.id} className="px-6 py-3 rounded-xl border-2 border-gray-300 text-[#64748B] font-semibold hover:bg-gray-50 transition-all disabled:opacity-50">
-                      <X className="w-5 h-5" />
+                    <button onClick={() => setStatus(r.id, "cancelled")} disabled={busyId === r.id} className="btn btn-outline" aria-label="Cancel case">
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
                 )}

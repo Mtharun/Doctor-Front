@@ -17,29 +17,24 @@ export default function PatientLayout() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-[#F8FAFC] via-[#EFF6FF] to-[#F0F9FF] overflow-x-hidden">
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden -z-10">
-        <div className="absolute -top-40 -right-40 w-[32rem] h-[32rem] rounded-full bg-[#0EA5E9]/20 blur-3xl" />
-        <div className="absolute top-1/2 -left-40 w-[26rem] h-[26rem] rounded-full bg-[#22C55E]/10 blur-3xl" />
-      </div>
-
-      <header className="bg-white/70 backdrop-blur-xl border-b border-[#0EA5E9]/10 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-ink-50">
+      <header className="bg-white border-b border-ink-200 sticky top-0 z-50">
+        <div className="container-page py-3.5 flex items-center justify-between">
           <Link to="/patient/dashboard" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center shadow-md shadow-[#0EA5E9]/20 transition-transform group-hover:scale-105">
-              <User className="w-5 h-5 text-white" />
+            <div className="w-9 h-9 rounded-md bg-brand-600 flex items-center justify-center">
+              <User className="w-4.5 h-4.5 text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-[#0F172A] leading-tight">{user?.name || "Patient"}</h1>
-              <p className="text-xs text-[#64748B]">Patient Portal</p>
+              <h1 className="font-semibold text-ink-900 leading-tight text-sm">{user?.name || "Patient"}</h1>
+              <p className="text-xs text-ink-500">Patient Portal</p>
             </div>
           </Link>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <NotificationBell />
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-[#64748B] hover:bg-gray-100 hover:text-[#0F172A] transition-colors text-sm font-medium"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-md text-ink-500 hover:bg-ink-100 hover:text-ink-900 transition-colors text-sm font-medium"
             >
               <LogOut className="w-4 h-4" />
               <span className="hidden sm:inline">Logout</span>
@@ -48,9 +43,7 @@ export default function PatientLayout() {
         </div>
       </header>
 
-      <div className="relative">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 }

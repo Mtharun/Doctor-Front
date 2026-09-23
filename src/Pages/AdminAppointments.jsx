@@ -12,12 +12,12 @@ const STATUS_FILTERS = ["all", "pending", "confirmed", "completed", "cancelled",
 
 const NEXT_ACTIONS = {
   pending: [
-    { status: "confirmed", label: "Confirm", style: "bg-[#22C55E]/10 text-[#22C55E] hover:bg-[#22C55E]/20" },
-    { status: "rejected", label: "Reject", style: "bg-[#EF4444]/10 text-[#EF4444] hover:bg-[#EF4444]/20" },
+    { status: "confirmed", label: "Confirm", style: "bg-success-50 text-success-600 hover:bg-success-50/70" },
+    { status: "rejected", label: "Reject", style: "bg-danger-50 text-danger-600 hover:bg-danger-50/70" },
   ],
   confirmed: [
-    { status: "completed", label: "Mark Completed", style: "bg-[#0EA5E9]/10 text-[#0EA5E9] hover:bg-[#0EA5E9]/20" },
-    { status: "cancelled", label: "Cancel", style: "bg-gray-100 text-gray-600 hover:bg-gray-200" },
+    { status: "completed", label: "Mark Completed", style: "bg-brand-50 text-brand-700 hover:bg-brand-100" },
+    { status: "cancelled", label: "Cancel", style: "bg-ink-100 text-ink-600 hover:bg-ink-200" },
   ],
 };
 
@@ -64,33 +64,33 @@ export default function AdminAppointments() {
 
   return (
     <div className="p-4 sm:p-8">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-[#0F172A] mb-2">Appointments</h1>
-            <p className="text-lg sm:text-xl text-[#64748B]">Manage all patient appointments</p>
+            <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-ink-900 mb-1">Appointments</h1>
+            <p className="text-ink-500">Manage all patient appointments</p>
           </div>
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B]" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-ink-400" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by patient name or email..."
-              className="pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] w-full sm:w-80"
+              className="input-field pl-10 w-full sm:w-80"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {[
             { value: counts.total, label: "Total" },
             { value: counts.pending, label: "Pending" },
             { value: counts.confirmed, label: "Confirmed" },
             { value: counts.today, label: "Today" },
           ].map((s) => (
-            <div key={s.label} className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] mb-1">{s.value}</h3>
-              <p className="text-sm sm:text-base text-[#64748B]">{s.label}</p>
+            <div key={s.label} className="card p-5">
+              <h3 className="text-2xl font-serif font-semibold text-ink-900 mb-1">{s.value}</h3>
+              <p className="text-sm text-ink-500">{s.label}</p>
             </div>
           ))}
         </div>
@@ -100,8 +100,8 @@ export default function AdminAppointments() {
             <button
               key={f}
               onClick={() => setStatus(f)}
-              className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
-                status === f ? "bg-[#0EA5E9] text-white shadow-lg" : "bg-white/60 text-[#64748B] hover:bg-white"
+              className={`px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors border ${
+                status === f ? "bg-ink-900 border-ink-900 text-white" : "bg-white border-ink-200 text-ink-600 hover:border-ink-300"
               }`}
             >
               {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -117,49 +117,49 @@ export default function AdminAppointments() {
         )}
 
         {appointments && appointments.length > 0 && (
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-xl border border-white overflow-hidden">
+          <div className="card overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gradient-to-r from-[#0EA5E9]/5 to-[#0284C7]/5">
+              <table className="table-clean">
+                <thead>
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Patient</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Date &amp; Time</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Service</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Dentist</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Status</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748B]">Actions</th>
+                    <th>Patient</th>
+                    <th>Date &amp; Time</th>
+                    <th>Service</th>
+                    <th>Dentist</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {appointments.map((apt, i) => (
-                    <motion.tr key={apt.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }} className="hover:bg-[#0EA5E9]/5 transition-colors">
-                      <td className="px-6 py-4">
-                        <p className="font-semibold text-[#0F172A]">{apt.patient.name}</p>
-                        <p className="text-sm text-[#64748B]">{apt.patient.phone}</p>
+                <tbody>
+                  {appointments.map((apt) => (
+                    <tr key={apt.id}>
+                      <td>
+                        <p className="font-medium text-ink-900">{apt.patient.name}</p>
+                        <p className="text-xs text-ink-500">{apt.patient.phone}</p>
                       </td>
-                      <td className="px-6 py-4">
-                        <p className="font-medium text-[#0F172A]">{apt.date}</p>
-                        <p className="text-sm text-[#64748B]">{apt.time}</p>
+                      <td>
+                        <p className="text-ink-900">{apt.date}</p>
+                        <p className="text-xs text-ink-500">{apt.time}</p>
                       </td>
-                      <td className="px-6 py-4 text-[#0F172A]">{apt.service.name}</td>
-                      <td className="px-6 py-4 text-[#64748B]">{apt.dentist.name}</td>
-                      <td className="px-6 py-4"><StatusBadge status={apt.status} /></td>
-                      <td className="px-6 py-4">
+                      <td>{apt.service.name}</td>
+                      <td className="text-ink-500">{apt.dentist.name}</td>
+                      <td><StatusBadge status={apt.status} /></td>
+                      <td>
                         <div className="flex gap-2">
                           {(NEXT_ACTIONS[apt.status] || []).map((action) => (
                             <button
                               key={action.status}
                               disabled={busyId === apt.id}
                               onClick={() => updateStatus(apt.id, action.status)}
-                              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all disabled:opacity-50 ${action.style}`}
+                              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors disabled:opacity-50 ${action.style}`}
                             >
                               {busyId === apt.id ? <Loader2 className="w-4 h-4 animate-spin" /> : action.label}
                             </button>
                           ))}
-                          {!(NEXT_ACTIONS[apt.status] || []).length && <span className="text-sm text-gray-400">—</span>}
+                          {!(NEXT_ACTIONS[apt.status] || []).length && <span className="text-sm text-ink-300">&mdash;</span>}
                         </div>
                       </td>
-                    </motion.tr>
+                    </tr>
                   ))}
                 </tbody>
               </table>
